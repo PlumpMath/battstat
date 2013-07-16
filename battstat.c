@@ -53,11 +53,19 @@ int send_notification(char *urgency, char *summary, char *body) {
 
 int main(int argc, char **argv) {
     for(;;) {
+
+        if(oldstatus != 'U') {
+            // wait; we don't want to poll too often..
+            // We skip this on the first iteration, as it gives us faster
+            // startup. We don't want to just put it at the end of the loop,
+            // since then in the event of an error we would start burning up
+            // resources (the sleep would be skipped by the contiue
+            // statements.)
+            sleep(1);
+        }
+
         // clear output from last time;
         bzero(status_line, sizeof status_line);
-
-        // wait; we don't want to poll too often..
-        sleep(1);
 
         // open all the requsite files
         status_f     = fopen(BATDIR"status", "r");
