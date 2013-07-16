@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <unistd.h>
@@ -11,7 +10,6 @@ FILE *status_f, *capacity_f, *power_now_f, *energy_now_f;
 char status, oldstatus = 'U'; // U = Unknown (hasn't been polled yet),
                               // C = Charging
                               // D = Discharging
-FILE *output;
 uint64_t energy, power;
 int capacity;
 uint64_t hour, min, sec;
@@ -54,13 +52,6 @@ int send_notification(char *urgency, char *summary, char *body) {
 }
 
 int main(int argc, char **argv) {
-    // make sure we're in the user's home directory.
-    char *home = getenv("HOME");
-    if(!home) {
-        fprintf(stderr, "%s: Error: $HOME is not set\n", argv[0]);
-    }
-    chdir(home);
-    
     for(;;) {
         // clear output from last time;
         bzero(status_line, sizeof status_line);
@@ -106,12 +97,8 @@ int main(int argc, char **argv) {
         // clean up after ourselves.
         close_files();
 
-        // output the status. (another script will watch this file and
-        // incorporate it into the statusbar.
-        if((output = fopen(".battstat", "w"))) {
-            fputs(status_line, output);
-            fclose(output);
-        }
+        // output the status.
+        puts(status_line);
 
         // check for low battery states, and notify if need be.
         if(hour == 0) {
