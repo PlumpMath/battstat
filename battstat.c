@@ -90,7 +90,7 @@ int main(int argc, char **argv) {
 
         // build the status line.
         snprintf(status_line, sizeof status_line,
-            "%s (%d%%), %lu:%02lu:%02lu\n",
+            "%s (%d%%), %lu:%02lu:%02lu",
             (status == 'C')? "Charging" : "Discharging",
             capacity, hour, min, sec);
 
@@ -99,9 +99,11 @@ int main(int argc, char **argv) {
 
         // output the status.
         puts(status_line);
+        fflush(stdout);
 
         // check for low battery states, and notify if need be.
-        if(hour == 0) {
+        // We don't want to report low battery if we're on AC.
+        if(status != 'C' && hour == 0) {
             // We don't want to give the same notification repeatedly, so
             // check that last time through we didn't have a low battery.
             if(min < 5 && oldmin >= 5) {
