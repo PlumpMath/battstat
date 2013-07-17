@@ -89,6 +89,13 @@ int main(int argc, char **argv) {
             continue;
         }
 
+        // This can happen for brief periods when we've just plugged in,
+        // unplugged the charger. We should just give it a bit more time.
+        if(power == 0) {
+            close_files();
+            continue;
+        }
+
         // work out how much time we have left.
         hour = energy/power;
         energy %= power;
