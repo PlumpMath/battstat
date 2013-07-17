@@ -98,7 +98,7 @@ int main(int argc, char **argv) {
 
         // build the status line.
         snprintf(status_line, sizeof status_line,
-            "%s (%d%%), %lu:%02lu:%02lu",
+            (status == 'C')? "%s (%d%%)" : "%s (%d%%), %lu:%02lu:%02lu",
             (status == 'C')? "Charging" : "Discharging",
             capacity, hour, min, sec);
 
