@@ -44,5 +44,5 @@ messages instead (The libnotify api is much more complex to use than the cli).
 
 ISC, see COPYING.
 
-1: http://dwm.suckless.org
-2: http://www.knopwob.org/dunst
+[1]: http://dwm.suckless.org
+[2]: http://www.knopwob.org/dunst
