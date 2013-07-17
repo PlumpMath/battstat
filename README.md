@@ -40,5 +40,9 @@ has less than 5 minutes remaining. It's worth noting that Battstat does not
 link against libnotify, rather it invokes the notify-send command to send
 messages instead (The libnotify api is much more complex to use than the cli).
 
+# License
+
+ISC, see COPYING.
+
 1: http://dwm.suckless.org
 2: http://www.knopwob.org/dunst
