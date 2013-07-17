@@ -1,5 +1,5 @@
-Battstat is a simple battery monitor that I wrote for use with dwm[1] and
-dunst[2], though it should be easy enough to use it with other window managers
+Battstat is a simple battery monitor that I wrote for use with [dwm][1] and
+[dunst][2], though it should be easy enough to use it with other window managers
 and notification daemons. It reports the status of the battery continuously,
 and provides low battery notifications via the notification daemon.
 
